@@ -1,0 +1,45 @@
+# Loadbalancer Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loadbalancer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: loadbalancer
+  template:
+    metadata:
+      labels:
+        app: loadbalancer
+    spec:
+      containers:
+        - name: loadbalancer
+          image: loadbalancer:v1
+          ports:
+            - containerPort: 8000
+          env:
+            - name: ADMIN_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: web-secret
+                  key: username
+            - name: ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: web-secret
+                  key: password
+            - name: AUTH_REQUIRED
+              value: "true"
+
+---
+# Loadbalancer Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: loadbalancer
+spec:
+  selector:
+    app: loadbalancer
+  ports:
+    - port: 8000

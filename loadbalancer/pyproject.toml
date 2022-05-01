@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "shard"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+fastapi = "^0.61.1"
+httpx = "^0.22.0"
+uvicorn = "^0.17.6"
+asyncio = "^3.4.3"
+fastapi-security = "^0.5.0"
+
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=1.0"]
+build-backend = "poetry.masonry.api"

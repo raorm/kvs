@@ -1,0 +1,100 @@
+# Shard1 Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shard1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shard1
+  template:
+    metadata:
+      labels:
+        app: shard1
+    spec:
+      containers:
+        - name: shard1
+          image: shard:v1
+          ports:
+            - containerPort: 8000
+
+---
+# Shard1 Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: shard1
+spec:
+  selector:
+    app: shard1
+  ports:
+    - port: 8000
+
+---
+# Shard2 Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shard2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shard2
+  template:
+    metadata:
+      labels:
+        app: shard2
+    spec:
+      containers:
+        - name: shard2
+          image: shard:v1
+          ports:
+            - containerPort: 8000
+
+---
+# Shard2 Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: shard2
+spec:
+  selector:
+    app: shard2
+  ports:
+    - port: 8000
+
+---
+# Shard3 Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shard3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shard3
+  template:
+    metadata:
+      labels:
+        app: shard3
+    spec:
+      containers:
+        - name: shard3
+          image: shard:v1
+          ports:
+            - containerPort: 8000
+
+---
+# Shard3 Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: shard3
+spec:
+  selector:
+    app: shard3
+  ports:
+    - port: 8000
