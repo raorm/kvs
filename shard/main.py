@@ -16,7 +16,7 @@ class KeyValuePair(BaseModel):
     key: str
     value: str
 
-@app.post("/set")
+@app.get("/set")
 def set(key: str, value: str):
     data[key] = value
     return {"message": f"Value set for {key}"}

@@ -56,8 +56,8 @@ def set(kvpair: KeyValuePair, username: str = Depends(get_admin_username)):
         raise HTTPException(status_code=400, detail="Value must not be empty")
     shard_numb = simple_hash(kvpair.key)
     url = f"http://shard{shard_numb}.default:8000/set"
-    r = httpx.post(url, data={'key': kvpair.key, 'value': kvpair.value})
-    return r.json()['message']
+    r = httpx.get(url, params={'key': kvpair.key, 'value': kvpair.value})
+    return r.json()
 
 @app.get("/exists")
 def exists(key: str, username: str = Depends(get_admin_username)):
